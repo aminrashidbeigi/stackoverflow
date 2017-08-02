@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\QuestionRequest;
+use App\Question;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -11,9 +13,9 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $questions = Question::paginate(10);
+        return view('questions.index')->withQuestions($questions);
     }
 
     /**
@@ -21,9 +23,8 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        return view('questions.create');
     }
 
     /**
@@ -32,9 +33,13 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(QuestionRequest $request) {
+        $question = new Question;
+        $question->title = $request->title;
+        $question->body = $request->body;
+        $question->user_id = Auth::user()->id;
+        $question->save();
+        return redirect()->route('questions.show', $question->id);
     }
 
     /**
@@ -43,9 +48,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id) {
+        $question = Question::find($id);
+        return view('questions.show')->withQuestion($question);
     }
 
     /**
@@ -54,9 +59,9 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id) {
+        $question = Question::find($id);
+        return view('questions.edit')->withQuestion($question);
     }
 
     /**
@@ -66,9 +71,12 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(QuestionRequest $request, $id) {
+        $question = Question::find($id);
+        $question->title = $request->title;
+        $question->body = $request->body;
+        $question->save();
+        return redirect()->route('questions.show', $question->id);
     }
 
     /**
@@ -77,8 +85,8 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id) {
+        Question::destroy($id);
+        return redirect()->route('questions.index');
     }
 }
