@@ -50,6 +50,8 @@ class QuestionController extends Controller
      */
     public function show($id) {
         $question = Question::find($id);
+        $question->view = $question->view + 1;
+        $question->save();
         return view('questions.show')->withQuestion($question);
     }
 

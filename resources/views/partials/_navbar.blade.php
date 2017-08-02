@@ -15,6 +15,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/questions">Questions<span class="sr-only">(current)</span></a></li>
+                <li><a href="/questions/create">Ask<span class="sr-only">(current)</span></a></li>
                 {{--<li><a href="/about">About</a></li>--}}
                 {{--<li><a href="/contact">Contact</a></li>--}}
             </ul>
