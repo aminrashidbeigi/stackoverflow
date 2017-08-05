@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\QuestionRequest;
 use App\Question;
+use App\Solution;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
@@ -52,7 +53,8 @@ class QuestionController extends Controller
         $question = Question::find($id);
         $question->view = $question->view + 1;
         $question->save();
-        return view('questions.show')->withQuestion($question);
+        $solutions = Solution::all();
+        return view('questions.show')->withQuestion($question)->withSolutions($solutions);
     }
 
     /**

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SolutionRequest;
+use App\Solution;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SolutionController extends Controller
 {
@@ -31,9 +34,14 @@ class SolutionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(SolutionRequest $request) {
+
+        $solution = new Solution;
+        $solution->body = $request->body;
+        $solution->user_id = Auth::user()->id;
+        $solution->question_id = $request->question_id;
+        $solution->save();
+        return redirect()->route('questions.show', $solution->question_id);
     }
 
     /**

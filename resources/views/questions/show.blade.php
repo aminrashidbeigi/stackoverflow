@@ -7,17 +7,55 @@
             <p><i>by: {{ $question->user->name }}</i></p>
 
             <hr>
-            <h3>Solutions</h3>
+            <h3>{{ count($solutions) }} Solutions</h3>
+
+            @foreach($solutions as $solution)
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="well text-center">
+                            <button type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                            </button>
+                            <h4>15</h4>
+                            <button type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                            </button>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-7">
+                        <div class="well">
+                            <p>{{$solution->body}}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="well">
+                            <div style="display: flex;">
+                                @if(Auth::check())
+                                    @if(Auth::user()->id == $solution->user_id)
+                                        {!! Html::linkRoute('solutions.edit', 'Edit', array($solution->id), array('class'=> 'btn btn-primary', 'style' => 'margin: 3px;')) !!}
+                                        {!! Form::model($solution, ['route' => ['solutions.destroy', $solution->id], 'method' => 'DELETE']) !!}
+                                        {{ Form::submit('Delete', array('class' => 'btn btn-danger', 'style' => 'margin: 3px;')) }}
+                                        {!! Form::close() !!}
+                                    @endif
+                                @endif
+                            </div>
+                            <div class="text-center">
+                                <h4>{{ $solution->user->name }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            @endforeach
 
             @if(Auth::check())
-                {!! Form::open([route('solutions.store')]) !!}
-
+                {!! Form::open(['route' => 'solutions.store']) !!}
                 {{ Form::label('body', 'Body:') }}
-
                 {{ Form::textarea('body', null, array('class' => 'form-control')) }}
-
+                {{ Form::hidden('question_id', $question->id) }}
                 {{ Form::submit('Reply', array('class' => 'btn btn-success btn-lg btn-block', 'style' => 'margin-top:20px;')) }}
-
                 {!! Form::close() !!}
 
             @else
