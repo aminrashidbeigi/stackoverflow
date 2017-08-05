@@ -34,4 +34,8 @@ class User extends Authenticatable
     public function solutions(){
         return $this->hasMany('App\Solution');
     }
+
+    public function notifications(){
+        return $this->hasMany('App\Notification');
+    }
 }

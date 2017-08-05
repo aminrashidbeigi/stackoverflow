@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\NotificationEvent;
 use App\Http\Requests\SolutionRequest;
 use App\Question;
 use App\Solution;
@@ -41,7 +42,12 @@ class SolutionController extends Controller
         $solution->body = $request->body;
         $solution->user_id = Auth::user()->id;
         $solution->question_id = $request->question_id;
+        $solution->user->notifications = $solution->user->notifications + 1;
+        $solution->user->save();
         $solution->save();
+
+        event(new NotificationEvent($solution));
+
         return redirect()->route('questions.show', $solution->question_id);
     }
 
