@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @foreach($questions as $question)
+    @foreach($questions->reverse() as $question)
         <div class="row">
             <div class="col-md-2">
                 <div class="well text-center" style="display: flex;">
@@ -18,7 +18,7 @@
 
             <div class="col-md-8">
                 <div class="well">
-                    <a href="{{ route('questions.show', $question->id) }}">
+                    <a href="{{ route('questions.show', $question->id) }}" class="text-left">
                         <h4>{{$question->title}}</h4>
                     </a>
                 </div>
@@ -30,7 +30,6 @@
                 <div class="col-md-2">
                     <div class="well" style="display: flex;">
                         {!! Html::linkRoute('questions.edit', 'Edit', array($question->id), array('class'=> 'btn btn-primary', 'style' => 'margin: 3px;')) !!}
-
                         {!! Form::model($question, ['route' => ['questions.destroy', $question->id], 'method' => 'DELETE']) !!}
                         {{ Form::submit('Delete', array('class' => 'btn btn-danger', 'style' => 'margin: 3px;')) }}
                         {!! Form::close() !!}

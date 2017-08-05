@@ -62,9 +62,9 @@ class SolutionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+        $solution = Solution::find($id);
+        return view('solutions.edit')->withSolution($solution);
     }
 
     /**
@@ -74,9 +74,12 @@ class SolutionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(SolutionRequest $request, $id){
+        $solution = Solution::find($id);
+        $solution->body = $request->body;
+        $question = $solution->question;
+        $solution->save();
+        return redirect()->route('questions.show', $question->id);
     }
 
     /**

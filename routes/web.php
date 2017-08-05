@@ -16,3 +16,5 @@ Route::resource('solutions', 'SolutionController');
 Auth::routes();
 
 Route::get('/', 'QuestionController@index')->name('home');
+
+Route::get('/solutions/{id}/votes/increase', 'SolutionController@increaseVote')->name('vote.increase');

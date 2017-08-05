@@ -25,8 +25,8 @@
                     </div>
 
                     <div class="col-md-7">
-                        <div class="well" id="solution-body">
-                            <p>{{$solution->body}}</p>
+                        <div class="well text-left" id="solution-body">
+                            <p class="text-left">{{$solution->body}}</p>
                         </div>
                     </div>
                     <div class="col-md-3">
@@ -42,7 +42,7 @@
                                 @endif
                             </div>
                             <div class="text-center">
-                                <h4>{{ $solution->user->name }}</h4>
+                                <p>solution by {{ $solution->user->name }} {{$solution->created_at}}</p>
                             </div>
                         </div>
                     </div>
@@ -95,6 +95,12 @@
     </div>
 
     <script>
+
+        {{--function increase(solution_id){--}}
+            {{--{{$id = solution_id}}--}}
+            {{--window.location = {{ route('vote.increase', $id) }};--}}
+        {{--}--}}
+
         var clientHeight = document.getElementById('vote').clientHeight;
 //        console.log(clientHeight);
         document.getElementById('solution-body').style.minHeight =clientHeight-20 + "px";
