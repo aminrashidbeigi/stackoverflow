@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SolutionRequest;
+use App\Question;
 use App\Solution;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -86,6 +87,23 @@ class SolutionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question_id = Solution::find($id)->question->id;
+        Solution::destroy($id);
+        return redirect()->route('questions.show', $question_id);
     }
+
+    public static function increaseVote($id, $question_id){
+        $solution = Solution::find($id);
+        $solution->votes = $solution->votes + 1;
+        $solution->save();
+        return route('questions.show', $question_id);
+    }
+
+    public static function decreaseVote($id, $question_id){
+        $solution = Solution::find($id);
+        $solution->votes = $solution->votes - 1;
+        $solution->save();
+        return route('questions.show', $question_id);
+    }
+
 }

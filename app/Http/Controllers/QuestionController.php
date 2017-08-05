@@ -53,7 +53,9 @@ class QuestionController extends Controller
         $question = Question::find($id);
         $question->view = $question->view + 1;
         $question->save();
-        $solutions = Solution::all();
+//        $solutions = Solution::all();
+        $solutions = Solution::where('question_id', '=', $question->id)->get();
+//        dd($solutions);
         return view('questions.show')->withQuestion($question)->withSolutions($solutions);
     }
 

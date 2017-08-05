@@ -10,13 +10,13 @@
             <h3>{{ count($solutions) }} Solutions</h3>
 
             @foreach($solutions as $solution)
-                <div class="row">
+                <div class="row" id="vote">
                     <div class="col-md-2">
-                        <div class="well text-center">
+                        <div class="well well-margin text-center ">
                             <button type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
                             </button>
-                            <h4>15</h4>
+                            <h4>{{ $solution->votes }}</h4>
                             <button type="button" class="btn btn-default">
                                 <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
                             </button>
@@ -25,12 +25,12 @@
                     </div>
 
                     <div class="col-md-7">
-                        <div class="well">
+                        <div class="well" id="solution-body">
                             <p>{{$solution->body}}</p>
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="well">
+                        <div class="well" id="solution-info">
                             <div style="display: flex;">
                                 @if(Auth::check())
                                     @if(Auth::user()->id == $solution->user_id)
@@ -94,4 +94,10 @@
         </div>
     </div>
 
+    <script>
+        var clientHeight = document.getElementById('vote').clientHeight;
+//        console.log(clientHeight);
+        document.getElementById('solution-body').style.minHeight =clientHeight-20 + "px";
+        document.getElementById('solution-info').style.minHeight =clientHeight-20 + "px";
+    </script>
 @endsection
