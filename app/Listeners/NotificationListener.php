@@ -28,7 +28,7 @@ class NotificationListener
     public function handle(NotificationEvent $event)
     {
         $notification = new Notification;
-        $notification->message = 'New solution for your question :'.route('questions.show', $event->solution->question->id);
+        $notification->message = 'New solution for your question';
         $notification->is_view = false;
         $notification->user_id =$event->solution->user_id;
         $notification->save();

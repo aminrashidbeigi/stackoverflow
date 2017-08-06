@@ -19,3 +19,5 @@ Route::get('/', 'QuestionController@index')->name('home');
 
 Route::put('/solutions/{id}/votes/increase', 'SolutionController@increaseVote')->name('vote.increase');
 Route::put('/solutions/{id}/votes/decrease', 'SolutionController@decreaseVote')->name('vote.decrease');
+
+Route::get('notifications', 'NotificationController@getIndex')->name('notifications');

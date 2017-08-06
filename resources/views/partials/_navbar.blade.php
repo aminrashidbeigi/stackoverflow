@@ -30,9 +30,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }} ({{ \Illuminate\Support\Facades\Auth::user()->notifications }})<span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Categories</a></li>
-                            <li><a href="#">Tags</a></li>
-                            <li><a href="#">Posts</a></li>
+                            <li><a href="/notifications">Notifications</a></li>
                             <li role="separator" class="divider"></li>
 
                             <li>
