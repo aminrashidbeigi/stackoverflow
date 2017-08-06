@@ -33,7 +33,7 @@
                         <div class="well" id="solution-info">
                             <div style="display: flex;">
                                 @if(Auth::check())
-                                    @if(Auth::user()->id == $solution->user_id)
+                                    @if(Auth::user()->id == $solution->user_id || strcmp(Auth::user()->type, 'admin') == 0)
                                         {!! Html::linkRoute('solutions.edit', 'Edit', array($solution->id), array('class'=> 'btn btn-primary', 'style' => 'margin: 3px;')) !!}
                                         {!! Form::model($solution, ['route' => ['solutions.destroy', $solution->id], 'method' => 'DELETE']) !!}
                                         {{ Form::submit('Delete', array('class' => 'btn btn-danger', 'style' => 'margin: 3px;')) }}
@@ -42,7 +42,7 @@
                                 @endif
                             </div>
                             <div class="text-center">
-                                <p>solution by {{ $solution->user->name }} {{$solution->created_at}}</p>
+                                <p>solution by {{ $solution->user->name }} <br>{{\App\Http\Controllers\QuestionController::time_elapsed_string($solution->created_at)}}</p>
                             </div>
                         </div>
                     </div>

@@ -10,7 +10,7 @@
                         <h4>{{ $question->view }}</h4><h5 style="margin: 3px;">Views</h5>
                     </div>
                     <div style="width: 50%;">
-                        <h4>{{ $question->view }}</h4><h5 style="margin: 3px;">Solutions</h5>
+                        <h4>{{ count($question->solutions) }}</h4><h5 style="margin: 3px;">Solutions</h5>
                     </div>
 
                 </div>
@@ -21,12 +21,14 @@
                     <a href="{{ route('questions.show', $question->id) }}" class="text-left">
                         <h4>{{$question->title}}</h4>
                     </a>
+                    <p class="text-right">
+                        {{\App\Http\Controllers\QuestionController::time_elapsed_string($question->created_at)}}
+                    </p>
                 </div>
             </div>
 
             @if(Auth::check())
-                @if(Auth::user()->id == $question->user_id)
-
+                @if(Auth::user()->id == $question->user_id || strcmp(Auth::user()->type, 'admin') == 0)
                 <div class="col-md-2">
                     <div class="well" style="display: flex;">
                         {!! Html::linkRoute('questions.edit', 'Edit', array($question->id), array('class'=> 'btn btn-primary', 'style' => 'margin: 3px;')) !!}
