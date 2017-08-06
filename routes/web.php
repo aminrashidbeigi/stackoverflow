@@ -17,4 +17,5 @@ Auth::routes();
 
 Route::get('/', 'QuestionController@index')->name('home');
 
-Route::get('/solutions/{id}/votes/increase', 'SolutionController@increaseVote')->name('vote.increase');
+Route::put('/solutions/{id}/votes/increase', 'SolutionController@increaseVote')->name('vote.increase');
+Route::put('/solutions/{id}/votes/decrease', 'SolutionController@decreaseVote')->name('vote.decrease');

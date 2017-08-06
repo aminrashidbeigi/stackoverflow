@@ -13,13 +13,20 @@
                 <div class="row" id="vote">
                     <div class="col-md-2">
                         <div class="well well-margin text-center ">
-                            <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
-                            </button>
+                            {!! Form::model($solution, ['route' => ['vote.increase', $solution->id], 'method' => 'PUT']) !!}
+                            {{ Form::submit('&uarr;', array('class' => 'btn btn-default')) }}
+                            {!! Form::close() !!}
+                            {{--<button type="button" class="btn btn-default">--}}
+                                {{--<span class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>--}}
+                            {{--</button>--}}
                             <h4>{{ $solution->votes }}</h4>
-                            <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
-                            </button>
+                            {{--<button type="button" class="btn btn-default">--}}
+                                {{--<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>--}}
+                            {{--</button>--}}
+
+                            {!! Form::model($solution, ['route' => ['vote.decrease', $solution->id], 'method' => 'PUT']) !!}
+                            {{ Form::submit('&darr;', array('class' => 'btn btn-default')) }}
+                            {!! Form::close() !!}
 
                         </div>
                     </div>

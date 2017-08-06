@@ -56,8 +56,19 @@ class QuestionController extends Controller
         $question->save();
 //        $solutions = Solution::all();
         $solutions = Solution::where('question_id', '=', $question->id)->get();
+
+
+        $col = new \Illuminate\Database\Eloquent\Collection();
+
+        if ($solutions != null) {
+            foreach($solutions as $cm) {
+                $col->add($cm);
+            }
+        }
+        $col = $col->sortBy('votes');
+
 //        dd($solutions);
-        return view('questions.show')->withQuestion($question)->withSolutions($solutions);
+        return view('questions.show')->withQuestion($question)->withSolutions($col->reverse());
     }
 
     /**

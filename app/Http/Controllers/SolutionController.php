@@ -101,18 +101,18 @@ class SolutionController extends Controller
         return redirect()->route('questions.show', $question_id);
     }
 
-    public static function increaseVote($id, $question_id){
+    public static function increaseVote($id){
         $solution = Solution::find($id);
         $solution->votes = $solution->votes + 1;
         $solution->save();
-        return route('questions.show', $question_id);
+        return redirect()->route('questions.show', $solution->question->id);
     }
 
-    public static function decreaseVote($id, $question_id){
+    public static function decreaseVote($id){
         $solution = Solution::find($id);
         $solution->votes = $solution->votes - 1;
         $solution->save();
-        return route('questions.show', $question_id);
+        return redirect()->route('questions.show', $solution->question->id);
     }
 
 }
