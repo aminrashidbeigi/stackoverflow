@@ -30,7 +30,7 @@ class NotificationListener
         $notification = new Notification;
         $notification->message = 'New solution for your question';
         $notification->is_view = false;
-        $notification->user_id =$event->solution->user_id;
+        $notification->user_id =$event->solution->question->user_id;
         $notification->save();
     }
 }

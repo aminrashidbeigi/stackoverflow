@@ -42,8 +42,8 @@ class SolutionController extends Controller
         $solution->body = $request->body;
         $solution->user_id = Auth::user()->id;
         $solution->question_id = $request->question_id;
-        $solution->user->notifications = $solution->user->notifications + 1;
-        $solution->user->save();
+        $solution->question->user->notifications = $solution->question->user->notifications + 1;
+        $solution->question->user->save();
         $solution->save();
 
         event(new NotificationEvent($solution));

@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">StackOverFlow</a>
+            <a href="/"><img src="/images/logo.png" alt="StackOverFlow" style="height: 40px;margin: 5px;"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

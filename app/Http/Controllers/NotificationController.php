@@ -11,7 +11,7 @@ class NotificationController extends Controller{
 
     public function getIndex(){
         $notifications = Notification::paginate()->where('user_id', '=', Auth::user()->id);
-        return view('notifications.notifications')->withNotifications($notifications);
+        return view('notifications.notifications')->withNotifications($notifications->reverse());
     }
 
     public static function viewed($id, $user_id){

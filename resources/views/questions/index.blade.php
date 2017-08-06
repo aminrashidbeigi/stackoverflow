@@ -28,7 +28,7 @@
             </div>
 
             @if(Auth::check())
-                @if(Auth::user()->id == $question->user_id || strcmp(Auth::user()->type, 'admin') == 0)
+                @if(Auth::user()->id == $question->user_id || strcmp(Auth::user()->role, 'admin') == 0)
                 <div class="col-md-2">
                     <div class="well" style="display: flex;">
                         {!! Html::linkRoute('questions.edit', 'Edit', array($question->id), array('class'=> 'btn btn-primary', 'style' => 'margin: 3px;')) !!}
